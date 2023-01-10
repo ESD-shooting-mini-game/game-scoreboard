@@ -28,20 +28,27 @@ class _HomeState extends State<Home> {
             onPressed: () {
               // refresh
               setState(() {
+                availablePorts.clear();
                 availablePorts = SerialPort.availablePorts;
               });
             },
-            icon: Icon(Icons.refresh_outlined),
+            icon: const Icon(Icons.refresh_outlined),
           ),
         ],
       ),
       body: Row(
         children: [
-          const Expanded(
+          Expanded(
               child: Center(
-            child: Text(
-              'Game Scoreboard',
-              style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Text(
+                  'Game Scoreboard',
+                  style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                ),
+                Text('Embedded System Design Project'),
+              ],
             ),
           )),
           Expanded(
