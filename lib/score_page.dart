@@ -17,6 +17,7 @@ class _ScorePageState extends State<ScorePage> {
   late SerialPortReader reader;
 
   int playerScore = 0;
+  int highScore = 0;
   bool gameStarted = false;
 
   DateTime? startTime;
@@ -68,7 +69,11 @@ class _ScorePageState extends State<ScorePage> {
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: Text('Awaiting result...'));
+              return const Center(
+                  child: Text(
+                'Get Ready!',
+                style: TextStyle(color: Colors.red, fontSize: 66),
+              ));
             }
 
             var decoded = String.fromCharCodes(snapshot.data!);
@@ -99,6 +104,9 @@ class _ScorePageState extends State<ScorePage> {
               print('Game ended');
               // reset counter
               decoded = ''; // reset the decoded buffer
+              if (playerScore > highScore) {
+                highScore = playerScore;
+              }
             }
             return Column(children: [
               Expanded(
@@ -107,11 +115,14 @@ class _ScorePageState extends State<ScorePage> {
                       child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Text('Highscore:  $highScore',
+                          style: const TextStyle(
+                              fontSize: 21, fontWeight: FontWeight.bold)),
                       const Text('Your score:', style: TextStyle(fontSize: 43)),
                       Text(
                         playerScore.toString(),
                         style: GoogleFonts.ibmPlexMono(
-                          fontSize: 410,
+                          fontSize: 423,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
