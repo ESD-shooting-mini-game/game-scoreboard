@@ -10,12 +10,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var availablePorts = [];
+  var availablePorts = ['COM9'];
 
   @override
   void initState() {
     super.initState();
-    availablePorts = SerialPort.availablePorts;
+    // availablePorts = SerialPort.availablePorts;
   }
 
   @override
